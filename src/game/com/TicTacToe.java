@@ -3,8 +3,8 @@ package game.com;
 import java.util.Scanner;
 
 public class TicTacToe {
-	static char userChoice;
-	static char computerChoice;
+	static char userChoice = 'x';
+	static char computerChoice = 'o';
 	char[] board=new char[10];
 	Scanner sc=new Scanner(System.in);
 	
@@ -16,26 +16,21 @@ public class TicTacToe {
 		
 	}
 	
-	private void chooseLetter() {
-		System.out.println("choose your choice 1. x  and 2.o");
-		int choice=sc.nextInt();
-		switch(choice){
-		case 1:
-			userChoice='x';
-			computerChoice='o';
-			System.out.println("user choice is :: "+userChoice+" Computer choice is :: "+computerChoice);
-			break;
-		case 2:
-			userChoice='o';
-			computerChoice='x';
-			System.out.println("user choice is :: "+userChoice+" Computer choice is :: "+computerChoice);
-			break;
-		default:
-			System.out.println("Enter valid option");
-			chooseLetter();
+	private void choice() {
+		int turn=(int) (Math.random() * 10) % 2;
+		if(turn == 0) {
+			System.out.println("user play first");
+		}else if(turn == 1) {
+			System.out.println("computer play first");
 		}
 	}
    
+	private void computerChoice() {
+		int computerTurn=(int)(Math.random() * 10) % 10;
+		board[computerTurn]=computerChoice;
+		System.out.println("Computer choice is :: "+computerChoice);
+	}
+	
 	private void showBoard() {
 		System.out.println("------------");
 		System.out.println("|" + board[1] + " | "+ board[2] + " | " + board[3] + " | ");
@@ -49,12 +44,14 @@ public class TicTacToe {
 	public void checkFreeIndex() {
 		System.out.println("choose index from 1 to 9 to make the move");
 		int index=sc.nextInt();
-		
+	   
+	    showBoard();
 		if(board[index] == 'x' || board[index] == 'o') {
 			System.out.println("index is not free");
 		} else if (board[index] != 'x' || board[index] == 'o') {
 			System.out.println("index is free");
 			board[index]=userChoice;
+			showBoard();
 		}
 		
 	}
@@ -63,14 +60,10 @@ public class TicTacToe {
 		System.out.println("Welcome to TicTacToeGame");
 		TicTacToe obj=new TicTacToe();
         obj.createBoard();
-        obj.chooseLetter();
+        obj.choice();
+        obj.computerChoice();
         obj.showBoard();
         obj.checkFreeIndex();
         
-        
-       
-	}
-
-
-
+        }
 }
