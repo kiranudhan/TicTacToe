@@ -9,8 +9,7 @@ public class TicTacToe {
 	Scanner sc=new Scanner(System.in);
 	
 	private void createBoard() {
-		
-		for(int i=1;i<10;i++) {
+     for(int i=1;i<10;i++) {
 			board[i]=' ';
 		}
 		
@@ -66,4 +65,6 @@ public class TicTacToe {
         obj.checkFreeIndex();
         
         }
-}
+  }
+
+	
